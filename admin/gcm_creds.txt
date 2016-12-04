@@ -1,0 +1,3 @@
+API key  : AIzaSyAajc0PSPENnViCVcB4HXbhqWthvfKCtCo
+URL : https://console.developers.google.com/apis/credentials/wizard?api=googlecloudmessaging&project=flixmates-039
+

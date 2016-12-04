@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>Flix | Registration</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="stylesheet" type="text/css" href="css/default.css"/>
+	    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    </head>
+    <body>    
+        <form action="" class="register" id="form_flexi_signup" />
+            <h1>Registration</h1>
+            <fieldset class="row1">
+                <legend>SELECT PROFESSION
+                </legend>
+                <p>
+		    <input type="hidden"  name="mode" value = "profilesignup" />
+		    <input type="hidden"  name="user_id" id="user_id"  />
+                </p>
+                <p>
+                    <label>Occupation *
+                    </label>
+                    <input type="text" readonly name="occupation" id="occupation"/>
+                </p>
+                <p>
+                    <label>Location *
+                    </label>
+                    <input type="text" name="location"/>
+                </p>
+                <p>
+                    <label>Age *
+                    </label>
+                    <input type="text" name="age"/>
+                </p>
+                <p>
+                    <label>Status *
+                    </label>
+                    <input type="text" name="status"/>
+                </p>
+                <p>
+                    <label>Followers (in numbers) *
+                    </label>
+                    <input type="text" name="followers"/>
+                </p>
+                <p>
+                    <label>Achievement (in numbers) *
+                    </label>
+                    <input type="text" name="achievement"/>
+                </p>
+                <p>
+                    <label>Recommendations (in numbers) *
+                    </label>
+                    <input type="text" name="recommendations"/>
+                </p>
+                <p>
+                    <label>Working with (person name) *
+                    </label>
+                    <input type="text" name="workingwith"/>
+                </p>
+                <p>
+                    <label>User Image *
+                    </label>
+                    <input type="file" name="userimage"/>
+                </p>
+                <p>
+                    <label>Profile Text (user profile) *
+                    </label>
+                    <textarea name="profile_text"/></textarea>
+                </p>
+                <p>
+                    <label class="obinfo">* obligatory fields
+                    </label>
+                </p>
+            </fieldset>
+            <fieldset class="row4">
+                <legend>Terms and Mailing
+                </legend>
+                <p class="agreement">
+                    <input type="checkbox" value=""/>
+                    <label>*  I accept the <a href="#">Terms and Conditions</a></label>
+                </p>
+                <p class="agreement">
+                    <input type="checkbox" value=""/>
+                    <label>I want to receive personalized offers by your site</label>
+                </p>
+                <p class="agreement">
+                    <input type="checkbox" value=""/>
+                    <label>Allow partners to send me personalized offers and related services</label>
+                </p>
+            </fieldset>
+            <fieldset class="row5">
+            <div><button class="button">Register &raquo;</button></div>
+            </fieldset>
+        </form>
+    </body>
+<script type="text/javascript">
+$(function () {
+    //validate
+    $(document).ready(function () {
+function GetParameterValues(param) {
+	var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+	for (var i = 0; i < url.length; i++) {
+	var urlparam = url[i].split('=');
+    	if (urlparam[0] == param) {
+    	return urlparam[1];
+    	}
+	}
+}
+
+     occupation = "";
+     if (GetParameterValues("occupation")) {
+	occupation =  GetParameterValues("occupation");
+     } 
+     id = "";
+     if (GetParameterValues("id")) {
+	id =  GetParameterValues("id");
+     } 
+     $('#occupation').val(decodeURI(occupation));
+     $('#user_id').val(decodeURI(id));
+     $("#form_flexi_signup").submit(function(event){
+         event.preventDefault();
+         data_value = $("#form_flexi_signup").serialize(); 
+            $.ajax({
+             type: 'POST',
+             url: '../ws.php',
+             data: data_value, 
+             success: function(a) {
+                 if (a) {
+                     var data = $.parseJSON(a);
+                     if (data) {
+                         alert(data.message);
+			 window.location = "../index.html";
+                     }
+                 } else {
+                     window.location = "../index.html";
+                 }
+             }
+           });
+
+     });
+    });
+
+
+  
+});
+ </script>
+</html>
+
+
+
+
+
